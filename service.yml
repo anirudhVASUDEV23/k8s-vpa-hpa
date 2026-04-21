@@ -1,0 +1,15 @@
+kind: Service
+apiVersion: v1
+
+metadata:
+  name: apache-service
+  namespace: apache
+
+spec:
+  selector:
+    app: apache #This selector applies to the pods that have the label "app: apache" which is defined in the deployment spec
+  ports:
+    - protocol: TCP
+      port: 80 #exposed port for the service
+      targetPort: 80 # port on the container that the service will forward traffic to
+  type: ClusterIP

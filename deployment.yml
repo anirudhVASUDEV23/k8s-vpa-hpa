@@ -1,0 +1,30 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: apache-deployment
+  namespace: apache
+
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: apache # This label is used to identify the pods that belong to this deployment
+  template:
+    metadata:
+      name: apache-pod
+      labels:
+        app: apache #Adding label to the pod template to match the selector in the deployment spec
+
+    spec:
+      containers:
+        - name: apache
+          image: httpd:latest
+          ports:
+            - containerPort: 80
+          resources:
+            limits:
+              memory: "200Mi"
+              cpu: "256m"
+            requests:
+              memory: "100Mi"
+              cpu: "128m"
